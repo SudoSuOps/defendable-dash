@@ -9,6 +9,7 @@ import type { FleetSummary, OrgUsage, ReceiptRollup } from "@/lib/types";
 import { Badge, Card, Callout, EmptyState } from "@/components/ui";
 import LedgerBadge from "@/components/LedgerBadge";
 
+export const runtime = "edge"; // next-on-pages: all dynamic routes must run on the edge
 export const dynamic = "force-dynamic"; // per-member, never cached
 
 function fmt(n: number | undefined | null): string {

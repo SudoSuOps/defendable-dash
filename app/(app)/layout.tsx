@@ -3,6 +3,8 @@
 import Shell from "@/components/Shell";
 import { requireMember } from "@/lib/auth";
 
+export const runtime = "edge"; // next-on-pages: all dynamic routes must run on the edge
+
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   await requireMember(); // redirects to /login when there's no session
   return <Shell>{children}</Shell>;
