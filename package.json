@@ -2,14 +2,15 @@
   "name": "defendable-dash",
   "version": "0.1.0",
   "private": true,
-  "description": "DefendableDash — The Office. Enterprise visibility surface for the Defendable ecosystem. The AI blackbox trust-me-bro days are over.",
+  "description": "DefendableDash \u2014 The Office. Enterprise visibility surface for the Defendable ecosystem. The AI blackbox trust-me-bro days are over.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "pages:build": "npx @cloudflare/next-on-pages@1"
+    "pages:build": "npx @cloudflare/next-on-pages@1",
+    "deploy": "bash scripts/deploy.sh"
   },
   "dependencies": {
     "clsx": "^2.1.1",
