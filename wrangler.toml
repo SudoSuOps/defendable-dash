@@ -1,0 +1,13 @@
+name = "defendable-dash"
+compatibility_date = "2026-05-28"
+# next-on-pages workers need Node APIs at runtime.
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[vars]
+NEXT_PUBLIC_SITE_URL = "https://defendabledash.com"
+DEFENDABLE_CLOUD_API_BASE = "https://api.defendablecloud.com"
+# Router base + token are set as encrypted secrets via:
+#   wrangler pages secret put DEFENDABLE_ROUTER_API_BASE
+#   wrangler pages secret put DEFENDABLE_ROUTER_TOKEN
+# Member JWT is supplied per-request from the signed-in session cookie (never a build var).
