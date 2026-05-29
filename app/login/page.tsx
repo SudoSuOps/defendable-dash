@@ -7,6 +7,16 @@ import type { AuthRequestResponse } from "@/lib/types";
 
 type Stage = "email" | "token";
 
+// The cloud emails a magic LINK (…/auth/callback?token=XXX) pointing at its own
+// vault. Members paste that whole link (or just the token) here — extract the token
+// either way so they never have to hand-surgery the URL.
+function extractToken(raw: string): string {
+  const s = raw.trim();
+  const m = s.match(/[?&]token=([^&\s]+)/);
+  if (m) return decodeURIComponent(m[1]);
+  return s;
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const [stage, setStage] = useState<Stage>("email");
@@ -48,7 +58,7 @@ export default function LoginPage() {
       const res = await fetch("/api/auth/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: token.trim() }),
+        body: JSON.stringify({ token: extractToken(token) }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok || !data.ok) {
@@ -96,14 +106,17 @@ export default function LoginPage() {
             </form>
           ) : (
             <form onSubmit={verify} className="space-y-4">
-              <Field label="Sign-in token" hint={`Sent to ${email}. Paste it below.`}>
+              <Field
+                label="Sign-in token or link"
+                hint={`Emailed to ${email}. Paste the whole "sign-in" link from the email (or just the token) — we'll pull the token out.`}
+              >
                 <input
                   type="text"
                   required
                   autoFocus
                   value={token}
                   onChange={(ev) => setToken(ev.target.value)}
-                  placeholder="paste token"
+                  placeholder="paste the email link or token"
                   className={`${inputClass} font-mono`}
                 />
               </Field>
