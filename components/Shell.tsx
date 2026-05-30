@@ -13,6 +13,7 @@ const NAV: { href: string; label: string }[] = [
   { href: "/fleet", label: "Fleet" },
   { href: "/cooks", label: "Cooks" },
   { href: "/tune", label: "Tune" },
+  { href: "/dev-eval", label: "Dev-Eval" },
 ];
 
 function isActive(pathname: string, href: string): boolean {
